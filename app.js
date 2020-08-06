@@ -16,16 +16,15 @@ const commentRoutes = require('./routes/comments');
 const campgroundRoutes = require('./routes/campgrounds');
 const indexRoutes = require('./routes/index');
 
-const url = process.env.DATABASEURL || 'mongodb://localhost/yelp_camp';
-mongoose.connect(url, {
-  useNewUrlParser: true,
-  useCreateIndex: true,
-  useUnifiedTopology: true
-}).then(() => {
-  console.log('Connected to DB!');
-}).catch(err => {
-  console.log('ERROR:', err.message);
-});
+const databaseUri = process.env.DATABASEURL || 'mongodb://localhost/yelp_camp';
+
+mongoose.connect(databaseUri,
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+  })
+  .then(() => console.log('Connected to DB!'))
+  .catch(err => console.log(`Database connection error: ${err.message}`));
 
 mongoose.set('useFindAndModify', false);
 app.use(bodyParser.urlencoded({ extended: true }));
