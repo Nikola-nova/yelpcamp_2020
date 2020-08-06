@@ -16,16 +16,17 @@ const commentRoutes = require('./routes/comments');
 const campgroundRoutes = require('./routes/campgrounds');
 const indexRoutes = require('./routes/index');
 
-// mongoose.connect('mongodb://localhost/yelp_camp', { useNewUrlParser: true, useUnifiedTopology: true });
-mongoose.connect('mongodb+srv://knox:palacinka25@cluster0.3ngl2.mongodb.net/yelp_camp?retryWrites=true&w=majority', {
-  useNewUrlParser: true,
-  useCreateIndex: true,
-  useUnifiedTopology: true
-}).then(() => {
-  console.log('Connected to DB!');
-}).catch(err => {
-  console.log('ERROR:', err.message);
-});
+mongoose.connect(process.env.DATABASEURL, { useNewUrlParser: true, useUnifiedTopology: true });
+// mongoose.connect('mongodb+srv://knox:palacinka25@cluster0.3ngl2.mongodb.net/yelp_camp?retryWrites=true&w=majority', {
+//   useNewUrlParser: true,
+//   useCreateIndex: true,
+//   useUnifiedTopology: true
+// }).then(() => {
+//   console.log('Connected to DB!');
+// }).catch(err => {
+//   console.log('ERROR:', err.message);
+// });
+
 mongoose.set('useFindAndModify', false);
 app.use(bodyParser.urlencoded({ extended: true }));
 app.set('view engine', 'ejs');
