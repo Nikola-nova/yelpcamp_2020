@@ -3,14 +3,6 @@ const router = express.Router();
 const Campground = require('../models/campground');
 const middleware = require('../middleware');
 
-// middlewares
-const isLoggedIn = (request, response, next) => {
-    if (request.isAuthenticated()) {
-        return next();
-    }
-    response.redirect('/login');
-}
-
 // INDEX- show all campgrounds
 router.get('/', (request, response) => {
     // Get all campgrounds from DB
@@ -18,7 +10,7 @@ router.get('/', (request, response) => {
         if (err) {
             console.log('Error:', err);
         } else {
-            response.render('campgrounds/index', { campgrounds: allCampgrounds });
+            response.render('campgrounds/index', { campgrounds: allCampgrounds, page: 'campgrounds' });
         }
     });
 });
