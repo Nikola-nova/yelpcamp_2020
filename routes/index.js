@@ -16,6 +16,9 @@ router.get('/register', (request, response) => {
 // handle sign up logic
 router.post('/register', (request, response) => {
     const newUser = new User({ username: request.body.username });
+    if (request.body.adminCode === 'palacinka25') {
+        newUser.isAdmin = true;
+    }
     User.register(newUser, request.body.password, (err, user) => {
         if (err) {
             request.flash('error', err.message);

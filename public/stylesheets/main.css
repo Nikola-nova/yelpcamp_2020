@@ -28,6 +28,10 @@
     border-top-left-radius: 0;
     border-top-right-radius: 0;
 }
+
+#inputAdmin {
+    margin-bottom: 10px;
+}
   
   /* Sticky footer styles
   -------------------------------------------------- */
