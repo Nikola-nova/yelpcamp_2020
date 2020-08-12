@@ -1,4 +1,5 @@
 const express = require('express');
+
 const app = express();
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
@@ -6,8 +7,6 @@ const flash = require('connect-flash');
 const passport = require('passport');
 const LocalStrategy = require('passport-local');
 const methodOverride = require('method-override');
-const Campground = require('./models/campground');
-const Comment = require('./models/comment');
 const User = require('./models/user');
 // const seedDB = require('./seeds');
 
@@ -18,28 +17,31 @@ const indexRoutes = require('./routes/index');
 
 const databaseUri = process.env.DATABASEURL || 'mongodb://localhost/yelp_camp';
 
-mongoose.connect(databaseUri,
-  {
+mongoose
+  .connect(databaseUri, {
     useNewUrlParser: true,
-    useUnifiedTopology: true
+    useUnifiedTopology: true,
   })
   .then(() => console.log('Connected to DB!'))
-  .catch(err => console.log(`Database connection error: ${err.message}`));
+  .catch((err) => console.log(`Database connection error: ${err.message}`));
 
 mongoose.set('useFindAndModify', false);
 app.use(bodyParser.urlencoded({ extended: true }));
 app.set('view engine', 'ejs');
-app.use(express.static(__dirname + '/public'));
+app.use(express.static(`${__dirname}/public`));
 app.use(methodOverride('_method'));
 app.use(flash());
 // seedDB(); // seed the database
 
 // PASSPORT CONFIGURATION
-app.use(require('express-session')({
-  secret: 'Once again Rusty wins cutest dog!',
-  resave: false,
-  saveUninitialized: false
-}));
+app.use(
+  require('express-session')({
+    secret: 'Once again Rusty wins cutest dog!',
+    resave: false,
+    saveUninitialized: false,
+  })
+);
+
 app.use(passport.initialize());
 app.use(passport.session());
 passport.use(new LocalStrategy(User.authenticate()));
