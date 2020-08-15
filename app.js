@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 
 const app = express();
@@ -18,12 +19,12 @@ const indexRoutes = require('./routes/index');
 const databaseUri = process.env.DATABASEURL || 'mongodb://localhost/yelp_camp';
 
 mongoose
-  .connect(databaseUri, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
-  .then(() => console.log('Connected to DB!'))
-  .catch((err) => console.log(`Database connection error: ${err.message}`));
+	.connect(databaseUri, {
+		useNewUrlParser: true,
+		useUnifiedTopology: true,
+	})
+	.then(() => console.log('Connected to DB!'))
+	.catch((err) => console.log(`Database connection error: ${err.message}`));
 
 mongoose.set('useFindAndModify', false);
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -35,11 +36,11 @@ app.use(flash());
 
 // PASSPORT CONFIGURATION
 app.use(
-  require('express-session')({
-    secret: 'Once again Rusty wins cutest dog!',
-    resave: false,
-    saveUninitialized: false,
-  })
+	require('express-session')({
+		secret: 'Once again Rusty wins cutest dog!',
+		resave: false,
+		saveUninitialized: false,
+	})
 );
 
 app.use(passport.initialize());
@@ -49,10 +50,10 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
 app.use((request, response, next) => {
-  response.locals.currentUser = request.user;
-  response.locals.error = request.flash('error');
-  response.locals.success = request.flash('success');
-  next();
+	response.locals.currentUser = request.user;
+	response.locals.error = request.flash('error');
+	response.locals.success = request.flash('success');
+	next();
 });
 
 app.use('/', indexRoutes);
@@ -62,5 +63,5 @@ app.use('/campgrounds/:id/comments', commentRoutes);
 const port = process.env.PORT || 3000;
 
 app.listen(port, () => {
-  console.log('The YelpCamp Server Has Started!');
+	console.log('The YelpCamp Server Has Started!');
 });
