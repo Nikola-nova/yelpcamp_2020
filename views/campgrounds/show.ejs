@@ -17,7 +17,7 @@
 				<h5 class="card title border-0"><%= campground.name %></h5>
 				<div class="clearfix"></div>
 				<p>
-					<em>Submitted By <%= campground.author.username %></em>
+					<em>Submitted By <%= campground.author.username %>, <%= moment(campground.createdAt).fromNow() %></em>
 				</p>
 				<hr />
 				<p class="card-text"><%= campground.description %></p>
@@ -58,7 +58,7 @@
 									<p class="card-text"><%= comment.text %></p>
 								</div>
 								<div class="float-right">
-									<p>10 days ago</p>
+									<p><%= moment(comment.createdAt).fromNow() %></p>
 									<% if (currentUser &&
 									comment.author.id.equals(currentUser._id) || currentUser &&
 									currentUser.isAdmin) {%>

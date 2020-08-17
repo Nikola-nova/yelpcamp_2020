@@ -17,23 +17,20 @@
     "express": "^4.17.1",
     "express-session": "^1.17.1",
     "method-override": "^3.0.0",
+    "moment": "^2.27.0",
     "mongoose": "^5.9.25",
     "node-geocoder": "^3.27.0",
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
-    "passport-local-mongoose": "^6.0.1"
+    "passport-local-mongoose": "^6.0.1",
+    "restify": "^8.5.1"
   },
   "devDependencies": {
-    "eslint": "^7.2.0",
-    "eslint-config-airbnb": "^18.2.0",
+    "eslint": "^7.7.0",
+    "eslint-config-airbnb-base": "^14.2.0",
     "eslint-config-prettier": "^6.11.0",
-    "eslint-plugin-import": "^2.21.2",
-    "eslint-plugin-jsx-a11y": "^6.3.0",
-    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-import": "^2.22.0",
     "eslint-plugin-prettier": "^3.1.4",
-    "eslint-plugin-react": "^7.20.0",
-    "eslint-plugin-react-hooks": "^4.0.0",
-    "nodemon": "^2.0.4",
     "prettier": "^2.0.5"
   }
 }

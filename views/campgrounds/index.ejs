@@ -15,12 +15,14 @@
 <div class="row text-center" style="display: flex; flex-wrap: wrap;">
 	<% campgrounds.map((campground) => { %>
 	<div class="col-lg-3 col-md-4 col-sm-6 mb-4">
-		<div class="card">
-			<img
+		<div class="card h-100">
+			<div class="embed-responsive embed-responsive-4by3">
+				<img
 				src="<%= campground.image %>"
-				class="card-img-top card-same-height"
+				class="card-img-top embed-responsive-item"
 				alt="<%= campground.name %>"
-			/>
+				/>
+			</div>
 			<div class="card-body">
 				<h5 class="card-title"><%= campground.name %></h5>
 				<a href="/campgrounds/<%= campground._id %>" class="btn btn-primary"
