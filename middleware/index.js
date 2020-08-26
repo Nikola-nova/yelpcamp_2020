@@ -1,5 +1,6 @@
 const Campground = require('../models/campground');
 const Comment = require('../models/comment');
+const User = require('../models/user');
 
 // all ther middleware goes here
 const middlewareObj = {};
@@ -35,6 +36,27 @@ middlewareObj.checkCommentOwnership = (request, response, next) => {
       } else if (
         foundComment.author.id.equals(request.user._id) ||
         request.user.isAdmin
+      ) {
+        next();
+      } else {
+        request.flash('error', "You don't have permission to do that");
+        response.redirect('back');
+      }
+    });
+  } else {
+    request.flash('error', 'You need to be logged in to do that');
+    response.redirect('back');
+  }
+};
+
+middlewareObj.checkUserOwnership = (request, response, next) => {
+  if (request.isAuthenticated()) {
+    User.findById(request.params.id, (err, foundUser) => {
+      if (err || !foundUser) {
+        request.flash('error', 'User not found');
+        response.redirect('back');
+      } else if (
+        foundUser._id.equals(request.user._id || request.user.isAdmin)
       ) {
         next();
       } else {

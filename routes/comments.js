@@ -29,7 +29,6 @@ router.post('/', middleware.isLoggedin, (request, response) => {
       Comment.create(request.body.comment, (err, comment) => {
         if (err) {
           request.flash('error', 'Something went wrong');
-          console.log('Error:', err);
         } else {
           // add username and id to comment
           // eslint-disable-next-line no-param-reassign

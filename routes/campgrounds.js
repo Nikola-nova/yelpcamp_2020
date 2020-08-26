@@ -37,7 +37,6 @@ router.post('/', middleware.isLoggedin, (request, response) => {
     username: request.user.username,
   };
   geocoder.geocode(request.body.location, (err, geoData) => {
-    console.log(request.body.location);
     if (err || !geoData.length) {
       request.flash('error', 'Invalid address');
       return response.redirect('back');
